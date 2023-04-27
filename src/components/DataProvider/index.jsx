@@ -32,14 +32,14 @@ class DataProvider extends React.Component {
   };
 
   render() {
-    const { render } = this.props;
+
     const { error, isFetching, data } = this.state;
 
     return (
       <>
         {error && <div>OOPs</div>}
         {isFetching && <Spinner />}
-        {render(data)}
+        {this.props.children(data)}
       </>
     );
   }

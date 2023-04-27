@@ -6,24 +6,20 @@ class DataLoader extends React.Component {
     return (
       <div>
         <DataProvider
-          
-
-          
           loadData={() => {
             return fetch('/users.json').then(res => res.json());
-          } }
-          
-
-          render={data => {
-            return (
-              <ul>
-                {data.map(d => (
-                  <li>{d.name}</li>
-                ))}
-              </ul>
-            );
           }}
-        />
+        >
+      
+          {
+            data => {
+              return (<ul>
+                { data.map( d => <li>{d.name}</li>)}
+              </ul>)
+            }
+          }
+          
+        </DataProvider>
       </div>
     );
   }
