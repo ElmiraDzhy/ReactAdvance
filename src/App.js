@@ -8,6 +8,7 @@ import ProductsPage from './components/ProductsPage';
 import UserList from './components/UserList';
 import CounterPage from './components/pages/CounterPage'
 import DataLoader from './components/pages/DataLoader';
+import WindowChange from './components/WindowChange';
 class App extends React.Component {
   render() {
     return (
@@ -29,6 +30,8 @@ class App extends React.Component {
 
           <Link to="/counterPage">Click to go to CounterPage</Link>
           <Link to="/dataLoader">Click to go to DataLoader</Link>
+          <Link to="/WindowChange">Click to go to WindowChange</Link>
+
 
         </nav>
 
@@ -47,7 +50,9 @@ class App extends React.Component {
           <Route path="/userList" element={<UserList />}></Route>
 
           <Route path="/counterPage" element={<CounterPage />}></Route>
-          <Route path="/dataLoader" element={<DataLoader />}></Route>
+          <Route path="/dataLoader" element={ <DataLoader /> }></Route>
+          <Route path="/WindowChange" element={<WindowChange />}></Route>
+          
 
         </Routes>
       </BrowserRouter>

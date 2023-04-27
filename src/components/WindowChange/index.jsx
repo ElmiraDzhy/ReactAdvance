@@ -1,35 +1,21 @@
-import React, { Component } from 'react';
 
-export default class WindowChange extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      x: window.innerWidth,
-      y: window.innerHeight,
-    };
-  }
+import WindowResizer from '../WindowResizerState';
 
-  resizeHandler = e => {
-    this.setState({
-      x: e.target.innerWidth,
-      y: e.target.innerHeight,
-    });
-  };
-
-  componentDidMount = () => {
-    window.addEventListener('resize', this.resizeHandler);
-  };
-
-  componentWillUnmount = () => {
-    window.removeEventListener('resize', this.resizeHandler);
-  };
-
-  render() {
+const WindowChange =(props)=> {
+ 
     return (
-      <div>
-        <p>x: {this.state.x}</p>
-        <p>y: {this.state.y}</p>
-      </div>
+      <WindowResizer>
+          { data  => {
+            return ( 
+              <>
+              <p>x: {data.x}</p>
+               <p>y: {data.y}</p>
+              </>
+            )
+            }}
+      </WindowResizer>
     );
-  }
+  
 }
+
+export default WindowChange;
