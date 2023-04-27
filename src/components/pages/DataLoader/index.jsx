@@ -20,6 +20,22 @@ class DataLoader extends React.Component {
           }
           
         </DataProvider>
+
+        <DataProvider
+          loadData={() => {
+            return fetch('/phones.json').then(res => res.json());
+          }}
+        >
+      
+          {
+            data => {
+              return (<ol>
+                { data.map( d => <li>{ d.model } - {d.price }</li>)}
+              </ol>)
+            }
+          }
+          
+        </DataProvider>
       </div>
     );
   }

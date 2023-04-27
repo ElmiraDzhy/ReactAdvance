@@ -1,0 +1,30 @@
+[
+  {
+    "model": "Samsung",
+    "price": "200"
+  },
+  {
+    "model": "IPhone",
+    "price": "1500"
+  },
+  {
+    "model": "POCO",
+    "price": "700"
+  },
+  {
+    "model": "Xiaomi",
+    "price": "350"
+  },
+  {
+    "model": "Nokia",
+    "price": "150"
+  },
+  {
+    "model": "Fly",
+    "price": "289"
+  },
+  {
+    "model": "Samsung",
+    "price": "1200"
+  }
+]
