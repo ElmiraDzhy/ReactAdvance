@@ -2,6 +2,8 @@ import React from 'react';
 import Tree from './components/Tree';
 import { UserContext, ThemeContext } from './contexts';
 import Header from './components/Header';
+import { CONSTANTS } from './constants';
+const { THEMES } = CONSTANTS;
 
 class App extends React.Component {
   constructor(props) {
@@ -15,20 +17,23 @@ class App extends React.Component {
           'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80',
       },
 
-      theme: 'light',
+      theme: THEMES.LIGHT,
     };
   }
 
   logout = () => {
     this.setState({
-     user: {},
+      user: {},
     });
   };
 
   themeChange = () => {
-    const newTheme = this.state.theme === 'light' ? 'dark' : 'light';
-    console.log('message')
-    this.setState( {
+    const newTheme =
+      this.state.theme === THEMES.LIGHT
+        ? THEMES.DARK
+        : THEMES.LIGHT;
+
+    this.setState({
       theme: newTheme,
     });
   };

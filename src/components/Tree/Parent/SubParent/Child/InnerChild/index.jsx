@@ -2,6 +2,8 @@ import React from 'react';
 import { UserContext, ThemeContext } from '../../../../../../contexts';
 import classNames from 'classnames';
 import styles from './Child.module.css';
+import { CONSTANTS } from '../../../../../../constants';
+
 function InnerChild() {
   return (
     <ThemeContext.Consumer>
@@ -9,8 +11,8 @@ function InnerChild() {
         return <UserContext.Consumer>
           {([user, logOut]) => {
             const className = classNames({
-              [styles.light]: theme === 'light',
-              [styles.dark]: theme === 'dark',
+              [styles.light]: theme === CONSTANTS.THEMES.LIGHT,
+              [styles.dark]: theme === CONSTANTS.THEMES.DARK,
             });
             return (
               <div className={className}>
