@@ -7,10 +7,13 @@ function InnerChild() {
       {([user, logOut]) => {
         return (
           <div>
+            <img
+              style={{ width: '300px', height: '300px' }}
+              src={user.avatar}
+              alt=""
+            />
             <p>{user.name}</p>
             <p>{user.surname}</p>
-            <img src={user.avatar} alt="" />
-
             <button onClick={logOut}>LogOut</button>
           </div>
         );

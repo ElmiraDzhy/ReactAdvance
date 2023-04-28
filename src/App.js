@@ -1,6 +1,7 @@
 import React  from 'react';
 import Tree from './components/Tree';
 import { UserContext } from './contexts';
+import Header from './components/Header'
 
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
     const { user } = this.state;
     return (
       <UserContext.Provider value={ [ user, this.logout ] }>
+        <Header/>
         <Tree />
       </UserContext.Provider> )
   }
