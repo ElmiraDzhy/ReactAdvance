@@ -20,11 +20,13 @@ code {
 
 nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 nav > * {
-  width: 300px;
+  width: 180px;
   margin: 10px;
   background-color: rgba(250, 235, 215, 0.281);
   padding: 20px;
