@@ -1,22 +1,38 @@
 import React from 'react';
-import { UserContext } from '../../contexts';
+import classNames from 'classnames';
+import { UserContext, ThemeContext } from '../../contexts';
+import styles from './Header.module.css';
 
 function index() {
   return (
-    <UserContext.Consumer>
-      {([user]) => {
-        return (
-          <nav style={ { backgroundColor: 'wheat' } }>
-            <h1>Header</h1>
-            <img
-              style={{ width: '150px', height: '150px', marginLeft: 'auto'}}
-              src={user.avatar}
-              alt=""
-            />
-          </nav>
-        );
+    <ThemeContext.Consumer>
+      { ( [ theme, themeChange ] ) => {
+      console.log(theme)
+        return <UserContext.Consumer>
+          {([user]) => {
+            const className = classNames({
+              [styles.light]: theme === 'light',
+              [styles.dark]: theme === 'dark',
+            });
+            return (
+              <nav className={className}>
+                <h1>Header</h1>
+                <img
+                  style={{
+                    width: '150px',
+                    height: '150px',
+                    marginLeft: 'auto',
+                  }}
+                  src={user.avatar}
+                  alt=""
+                />
+                <button style={ { width: '100px', height: '30px'}} onClick={themeChange}>ChangeTheme</button>
+              </nav>
+            );
+          }}
+        </UserContext.Consumer>;
       }}
-    </UserContext.Consumer>
+    </ThemeContext.Consumer>
   );
 }
 

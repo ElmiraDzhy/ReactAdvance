@@ -25,11 +25,4 @@ nav {
   flex-wrap: wrap;
 }
 
-nav > * {
-  width: 180px;
-  margin: 10px;
-  background-color: rgba(250, 235, 215, 0.281);
-  padding: 20px;
-  text-decoration: none;
-  color: white;
-}
+
