@@ -1,22 +1,22 @@
-import React from 'react'
-import { UserContext } from '../../../../../../contexts'
+import React from 'react';
+import { UserContext } from '../../../../../../contexts';
 
 function InnerChild() {
   return (
     <UserContext.Consumer>
-      { value => {
+      {([user, logOut]) => {
         return (
           <div>
-              <p>{ value.name }</p>
-            <p>{ value.surname }</p>
-            <img src={value.avatar} alt="" />
+            <p>{user.name}</p>
+            <p>{user.surname}</p>
+            <img src={user.avatar} alt="" />
 
+            <button onClick={logOut}>LogOut</button>
           </div>
-          
-        )
-      } }
+        );
+      }}
     </UserContext.Consumer>
-  )
+  );
 }
 
-export default InnerChild
+export default InnerChild;
