@@ -5,7 +5,11 @@ import * as yup from 'yup';
 const SIGN_UP_SCHEMA = yup.object({
   email: yup.string().required(),
   password: yup.string().required(),
-  firstName: yup.string(),
+  firstName: yup
+    .string()
+    .required()
+    .min(2, 'Name must be more than 1 letter')
+    .max(20),
   lastName: yup.string(),
 });
 
@@ -17,6 +21,7 @@ export default class SignUpForm extends Component {
       password: '',
       firstName: '',
       lastName: '',
+      error: null,
     };
   }
 
@@ -29,47 +34,49 @@ export default class SignUpForm extends Component {
   handlerSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    SIGN_UP_SCHEMA.isValid(this.state)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(e => {
-        console.log(e);
+    try {
+      const result = SIGN_UP_SCHEMA.validateSync(this.state);
+      console.log(result);
+    } catch (e) {
+      this.setState({
+        error: e,
       });
+    }
   };
 
   render() {
-    const { email, password, firstName, lastName } = this.state;
+    const { email, password, firstName, lastName, error } = this.state;
     return (
       <form className={styles.form} onSubmit={this.handlerSubmit}>
         <input
           type="text"
-          name="email"
-          value={email}
-          placeholder=""
-          onChange={this.changeHandler}
-        />
-        <input
-          type="text"
           name="firstName"
           value={firstName}
-          placeholder=""
+          placeholder="name"
           onChange={this.changeHandler}
         />
         <input
           type="text"
           name="lastName"
           value={lastName}
-          placeholder=""
+          placeholder="surname"
+          onChange={this.changeHandler}
+        />
+        <input
+          type="text"
+          name="email"
+          value={email}
+          placeholder="email"
           onChange={this.changeHandler}
         />
         <input
           type="password"
           name="password"
           value={password}
-          placeholder=""
+          placeholder="password"
           onChange={this.changeHandler}
         />
+        {error && <p>{error.message}</p>}
         <button type="submit">Sign In</button>
       </form>
     );
