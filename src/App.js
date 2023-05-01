@@ -1,6 +1,6 @@
 import React from 'react';
 import { CONSTANTS } from './constants';
-import SignUpForm from './components/SignUpForm';
+import SignInForm from './components/SignInForm';
 const { THEMES } = CONSTANTS;
 
 class App extends React.Component {
@@ -35,7 +35,7 @@ class App extends React.Component {
   };
 
   render() {
-    return <SignUpForm />;
+    return <SignInForm />;
   }
 }
 

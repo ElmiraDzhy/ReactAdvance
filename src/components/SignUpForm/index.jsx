@@ -32,7 +32,6 @@ const SignUpForm = () => {
       }}
     >
       {formikProps => {
-        const { errors } = formikProps;
         return (
           <Form className={styles.form}>
             <Field name="firstName" placeholder="name" />

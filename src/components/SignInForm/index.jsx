@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
 import * as yup from 'yup';
-import styles from './SignInForm.module.css'
+import styles from './SignInForm.module.css';
 
 const SCHEMA = yup.object({
   email: yup.string().required(),
@@ -23,12 +23,22 @@ function SignInForm(props) {
     >
       {props => {
         return (
-          <Form className={ styles.form }>
-            <Field name="email" className={ styles.field } />
-            <ErrorMessage name="email" />
-            <Field name="password" className={ styles.field }/>
-            <ErrorMessage name="email" />
-            <button type="submit" className={styles.button}>Sign In</button>
+          <Form className={styles.form}>
+            <Field
+              name="email"
+              placeholder="Email address"
+              className={styles.field}
+            />
+            <ErrorMessage component={'p'} name="email" className={styles.errorMessage} />
+            <Field
+              name="password"
+              placeholder="Password"
+              className={styles.field}
+            />
+            <ErrorMessage component={'p'} name="email" className={styles.errorMessage} />
+            <button type="submit" className={styles.button}>
+              Login
+            </button>
           </Form>
         );
       }}

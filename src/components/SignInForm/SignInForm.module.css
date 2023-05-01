@@ -1,39 +1,56 @@
 .field {
-  width: 200px;
+  position: relative;
+  width: 400px;
   height: 50px;
   background-color: white;
-  font-size: 20px;
+  font-size: 12px;
   margin: 0;
-  padding: 5px;
+  padding: 10px;
+  border-radius: 2px;
 
   border: none;
+  margin-bottom: 10px;
 }
 
 .form {
-  width: 300px;
   display: flex;
   flex-direction: column;
   padding: 30px 20px;
-  height: 230px;
-  justify-content: space-between;
+  height: fit-content;
   align-items: center;
-  border-radius: 40px;
-  background-color: rgb(59, 59, 248);
-  margin: 50px auto;
 }
 
 .button {
-  background-color: rgb(78, 78, 253);
+  background-color: rgb(64, 199, 204);
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-  width: 70px;
-  height: 30px;
+  width: 400px;
+
+  height: 50px;
+
   border: none;
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
-.field:focus{
+.field:focus {
   outline: none;
 }
 
+.errorMessage {
+  position: absolute;
+  z-index: 100;
+  top: 60px;
+  width: 400px;
+  height: 50px;
+  background-color: rgba(255, 135, 135, 0.342);
+  border: 1px solid red;
+  color: red;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+  background-repeat: no-repeat;
+  padding: 15px 10px 15px 50px;
+}

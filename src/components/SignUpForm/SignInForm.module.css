@@ -13,9 +13,11 @@
   background-color: antiquewhite;
 }
 
-.errorMessage{
+.errorMessage {
   font-size: 10px;
   color: red;
   background-color: aliceblue;
   border: 1px solid red;
+  margin: 0;
+  padding: 5px;
 }
