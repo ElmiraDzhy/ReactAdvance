@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SignInForm.module.css';
 import * as yup from 'yup';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 const SIGN_UP_SCHEMA = yup.object({
   email: yup.string().required(),
@@ -24,6 +24,7 @@ const SignUpForm = () => {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={SIGN_UP_SCHEMA}
       onSubmit={(values, action) => {
         console.log(values);
         console.log(action);
@@ -31,20 +32,38 @@ const SignUpForm = () => {
       }}
     >
       {formikProps => {
+        const { errors } = formikProps;
         return (
           <Form className={styles.form}>
             <Field name="firstName" placeholder="name" />
+            {/* { errors && <p>{ errors.firstName }</p> } */}
+            <ErrorMessage
+              name="firstName"
+              component={'p'}
+              className={styles.errorMessage}
+            />
+
             <Field name="lastName" placeholder="surname" />
-            <Field name="email" placeholder="email">
-              {({ feild, form, meta }) => {
-                <div>
-                  <input type="text" name="email" placeholder="email" />
-                  {meta.touched && meta.error && <div>{meta.error}</div>}
-                </div>;
-              }}
-            </Field>
+            <ErrorMessage
+              name="lastName"
+              component={'p'}
+              className={styles.errorMessage}
+            />
+
+            <Field name="email" placeholder="email" />
+            <ErrorMessage
+              name="email"
+              component={'p'}
+              className={styles.errorMessage}
+            />
+
             <Field name="password" placeholder="password" />
-            {/* {error && <p>{error.message}</p>} */}
+            <ErrorMessage
+              name="password"
+              component={'p'}
+              className={styles.errorMessage}
+            />
+
             <button type="submit">Sign In</button>
           </Form>
         );
