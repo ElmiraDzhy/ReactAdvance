@@ -5,7 +5,7 @@ export const withTheme = Componenet => {
     return (
       <ThemeContext.Consumer>
         {([theme, setTheme]) => {
-          return <Componenet theme={theme} setTheme={setTheme} />;
+          return <Componenet theme={theme} setTheme={setTheme} {...props}/>;
         }}
       </ThemeContext.Consumer>
     );
