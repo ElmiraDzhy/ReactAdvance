@@ -5,23 +5,31 @@ import styles from './Tree.module.css';
 import classNames from 'classnames';
 import { CONSTANTS } from '../../constants';
 
-function Tree(prop) {
+function Tree(props) {
+  const { theme } = props;
+  const className = classNames({
+    [styles.light]: theme === CONSTANTS.THEMES.LIGHT,
+    [styles.dark]: theme === CONSTANTS.THEMES.DARK,
+  });
   return (
-    <ThemeContext.Consumer>
-			{ ( [ theme ] ) => {
-				const className = classNames( {
-					[ styles.light ]: theme === CONSTANTS.THEMES.LIGHT,
-					[ styles.dark ]: theme === CONSTANTS.THEMES.DARK,
-				})
-        return (
-          <div className={className}>
-            <p>Tree</p>
-            <Parent />
-          </div>
-        );
-      }}
-    </ThemeContext.Consumer>
+    <div className={className}>
+      <p>Tree</p>
+      <Parent />
+    </div>
   );
 }
 
-export default Tree;
+const withTheme = Componenet => {
+  return props => {
+    return (
+      <ThemeContext.Consumer>
+        {([theme, setTheme]) => {
+          return <Componenet theme={theme} setTheme={setTheme} />;
+        }}
+      </ThemeContext.Consumer>
+    );
+  };
+};
+
+const TreeWithTheme = withTheme(Tree);
+export default TreeWithTheme;
