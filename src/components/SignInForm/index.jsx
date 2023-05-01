@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './SignInForm.module.css';
 
 export default class SignInForm extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ export default class SignInForm extends Component {
   }
 
   changeHandler = e => {
-    console.dir(e.target);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -18,14 +18,15 @@ export default class SignInForm extends Component {
 
   handlerSubmit = e => {
     e.preventDefault();
+    console.log(this.state)
   };
 
   render() {
     const { email, password } = this.state;
     return (
-      <form>
+      <form className={styles.form} onSubmit={this.handlerSubmit}>
         <input
-          type="email"
+          type="text"
           name="email"
           value={email}
           onChange={this.changeHandler}
@@ -36,7 +37,7 @@ export default class SignInForm extends Component {
           value={password}
           onChange={this.changeHandler}
         />
-        <button type="submit" onSubmit={this.handlerSubmit}>Sign In</button>
+        <button type="submit">Sign In</button>
       </form>
     );
   }
