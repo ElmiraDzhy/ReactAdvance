@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import styles from './SignInForm.module.css';
+import yup from 'yup';
+
+const SIGN_IN_SCHEMA = yup.object({
+  email: yup.string().required(),
+  password: yup.string().required(),
+});
 
 export default class SignInForm extends Component {
   constructor(props) {
@@ -18,7 +24,7 @@ export default class SignInForm extends Component {
 
   handlerSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
+    console.log(this.state);
   };
 
   render() {
