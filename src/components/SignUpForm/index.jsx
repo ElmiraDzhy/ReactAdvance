@@ -35,7 +35,14 @@ const SignUpForm = () => {
           <Form className={styles.form}>
             <Field name="firstName" placeholder="name" />
             <Field name="lastName" placeholder="surname" />
-            <Field name="email" placeholder="email" />
+            <Field name="email" placeholder="email">
+              {({ feild, form, meta }) => {
+                <div>
+                  <input type="text" name="email" placeholder="email" />
+                  {meta.touched && meta.error && <div>{meta.error}</div>}
+                </div>;
+              }}
+            </Field>
             <Field name="password" placeholder="password" />
             {/* {error && <p>{error.message}</p>} */}
             <button type="submit">Sign In</button>
