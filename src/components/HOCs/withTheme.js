@@ -5,7 +5,7 @@ const withTheme = Componenet => {
     return (
       <ThemeContext.Consumer>
         {([theme, setTheme]) => {
-          return <Componenet theme={theme} setTheme={setTheme} {...props} />;
+          return <Componenet theme={theme} themeChange={setTheme} {...props} />;
         }}
       </ThemeContext.Consumer>
     );
