@@ -1,8 +1,6 @@
 import React from 'react';
-import Tree from './components/Tree';
-import { UserContext, ThemeContext } from './contexts';
-import Header from './components/Header';
 import { CONSTANTS } from './constants';
+import SignInForm from './components/SignInForm';
 const { THEMES } = CONSTANTS;
 
 class App extends React.Component {
@@ -29,9 +27,7 @@ class App extends React.Component {
 
   themeChange = () => {
     const newTheme =
-      this.state.theme === THEMES.LIGHT
-        ? THEMES.DARK
-        : THEMES.LIGHT;
+      this.state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
 
     this.setState({
       theme: newTheme,
@@ -39,15 +35,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { user, theme } = this.state;
-    return (
-      <ThemeContext.Provider value={[theme, this.themeChange]}>
-        <UserContext.Provider value={[user, this.logout]}>
-          <Header />
-          <Tree />
-        </UserContext.Provider>
-      </ThemeContext.Provider>
-    );
+    return <SignInForm />;
   }
 }
 
