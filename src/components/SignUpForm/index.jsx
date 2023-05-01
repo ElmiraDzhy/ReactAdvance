@@ -29,6 +29,13 @@ export default class SignUpForm extends Component {
   handlerSubmit = e => {
     e.preventDefault();
     console.log(this.state);
+    SIGN_UP_SCHEMA.isValid(this.state)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   render() {
