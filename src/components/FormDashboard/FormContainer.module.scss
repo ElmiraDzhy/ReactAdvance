@@ -1,0 +1,22 @@
+.wrapper{
+  width: 200px;
+  padding: 10%;
+  border: {
+    top: {
+      width: 1px;
+      style: solid;
+      color: violet;
+    }
+  }
+
+  .form{
+    width: inherit;
+    height: 200px;
+    background-color: bisque;
+
+
+    * {
+      margin-top: 10px;
+    }
+  }
+}
