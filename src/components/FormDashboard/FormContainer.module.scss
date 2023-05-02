@@ -1,18 +1,28 @@
 .wrapper{
-  width: 200px;
-  padding: 10%;
-  border: {
-    top: {
-      width: 1px;
-      style: solid;
-      color: violet;
-    }
-  }
+  width: 400px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(10, 245, 245);
+  // border: {
+  //   top: {
+  //     width: 1px;
+  //     style: solid;
+  //     color: violet;
+  //   }
+  // }
 
   .form{
-    width: inherit;
+    width: 200px;
     height: 200px;
     background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 
     * {

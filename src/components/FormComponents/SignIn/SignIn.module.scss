@@ -1,0 +1,82 @@
+$field-width: 600px;
+$form-width: 650px;
+
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+.wrapper {
+  @include flex(column, center, center);
+}
+
+.form {
+  @include flex(column, flex-start, center);
+
+  padding: 30px 20px;
+  margin: 20px auto;
+
+  width: $form-width;
+
+  background-color: white;
+  border-radius: 20px;
+}
+
+.button {
+  background-color: rgb(20, 3, 255);
+  background: linear-gradient(50deg, rgb(147, 206, 255), blue);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: $form-width;
+
+  height: 50px;
+
+  border: none;
+  border-radius: 2px;
+}
+
+.fieldWrapper {
+  position: relative;
+}
+
+.fieldWrapper:first-child {
+  margin-bottom: 20px;
+}
+
+.labelField {
+  margin: 0 11px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 30px;
+  text-transform: capitalize;
+  margin-top: 50px;
+  font-weight: 600;
+}
+
+.divWrapper {
+  @include flex(row, flex-start, center);
+
+  width: $form-width;
+  margin: 20px 0;
+}
+
+a {
+  margin-left: auto;
+  color: blue;
+  text-decoration: none;
+}
+
+.checkboxWrapper {
+  @include flex(row, flex-start, center);
+}
+
+.remember {
+  color: rgb(66, 66, 66);
+}

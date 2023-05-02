@@ -1,9 +1,9 @@
 import React from 'react';
-import FormContainer from './components/FormDashboard';
+import FormPage from './components/pages/FormPage';
 class App extends React.Component {
 
   render() {
-    return <FormContainer />;
+    return <FormPage />;
   }
 }
 
