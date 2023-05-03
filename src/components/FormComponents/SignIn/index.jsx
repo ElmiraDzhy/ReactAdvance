@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import styles from './SignIn.module.scss';
 import * as yup from 'yup';
 import CustomField from '../CustomField';
+import ButtonForm from '../ButtonForm';
 
 const SCHEMA = yup.object({
   email: yup.string().email('Email addres is not correct').required(),
@@ -49,9 +50,7 @@ function SignIn(props) {
               </div>
               <a href="forgot_password.php">Forgot password</a>
             </div>
-            <button type="submit" className={styles.button}>
-              Login
-                </button>
+            <ButtonForm>{'Login'}</ButtonForm>
           </article>
         );
       }}

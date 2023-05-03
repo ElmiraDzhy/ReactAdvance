@@ -1,0 +1,14 @@
+$form-width: 650px;
+.button {
+  background-color: rgb(20, 3, 255);
+  background: linear-gradient(50deg, rgb(147, 206, 255), blue);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: $form-width;
+
+  height: 50px;
+
+  border: none;
+  border-radius: 10px;
+}

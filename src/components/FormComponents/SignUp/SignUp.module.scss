@@ -1,0 +1,37 @@
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+.flexWrapper {
+}
+
+.fieldWrapperOuter {
+  @include flex(row, center, flex-start);
+  width: 100%;
+}
+
+.fieldWrapperInner{
+  @include flex(column, center, flex-start);
+
+
+  * {
+      width: 290px;
+  }
+}
+
+.form {
+  @include flex(column, flex-start, center);
+
+  width: 650px;
+  margin: auto;
+
+  background-color: white;
+  
+}
+
+label{
+  width: 100%;
+}

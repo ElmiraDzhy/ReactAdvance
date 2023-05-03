@@ -7,7 +7,7 @@ export default class FormPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signIn: true,
+      signIn: false,
     };
   }
 
@@ -27,7 +27,7 @@ export default class FormPage extends Component {
     return (
       <section className={styles.container}>
         <button onClick={this.clickHandler}>{btnText}</button>
-        { signIn ? <SignIn onSubmit={this.submitToServer } /> : <SignUp />}
+        { signIn ? <SignIn onSubmit={this.submitToServer } /> : <SignUp onSubmit={this.submitToServer }/>}
       </section>
     );
   }
