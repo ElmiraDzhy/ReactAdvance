@@ -1,55 +1,38 @@
-import React, { Component } from "react";
-import { format, addSeconds } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import { format, addSeconds } from 'date-fns';
 
-export default class Timer extends Component {
-	constructor(props) {
-		super(props);
+const Timer = () => {
+  const [count, setCount] = useState(new Date(0, 0, 0, 0, 0, 0, 0));
 
-		this.state = {
-			count: new Date(0, 0, 0, 0, 0, 0, 0),
-		};
+  const [isGoing, setIsGoing] = useState(true);
 
-		this.timerId = null;
-	}
+  useEffect(() => {
+    if (isGoing) {
+      const id = setInterval(() => {
+        setCount(prev => addSeconds(count, 1));
+      }, 1000);
 
-	componentDidMount() {
-		this.start();
-	}
+      return () => {
+        console.log('message');
+        clearInterval(id);
+      };
+    }
+  }, [isGoing, count]);
 
-	componentWillUnmount() {
-		this.stop();
-	}
+  const clear = () => {
+    setCount(new Date(0, 0, 0, 0, 0, 0, 0));
+  };
 
-	start = () => {
-		console.log("i am here");
-		if (!this.timerId) {
-			this.timerId = setInterval(() => {
-				this.setState((state) => ({ count: addSeconds(state.count, 1) }));
-			}, 1000);
-		}
-	};
+  return (
+    <>
+      <h1>{format(count, 'HH:mm:ss')}</h1>
+      <button onClick={() => setIsGoing(!isGoing)}>
+        {isGoing ? 'stop' : 'start'}
+      </button>
 
-	stop = () => {
-		clearInterval(this.timerId);
-		this.timerId = null;
-	};
+      <button onClick={clear}>clear</button>
+    </>
+  );
+};
 
-	clear = () => {
-		this.stop();
-		this.setState({ count: new Date(0, 0, 0, 0, 0, 0, 0) });
-	};
-
-	render() {
-		const { count } = this.state;
-
-		return (
-			<>
-				<h1>{format(count, "HH:mm:ss")}</h1>
-				<button onClick={this.start}>start</button>
-				<button onClick={this.stop}>stop</button>
-				<button onClick={this.clear}>clear</button>
-			</>
-		);
-	}
-}
-
+export default Timer;

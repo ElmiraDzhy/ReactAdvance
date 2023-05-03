@@ -1,6 +1,7 @@
 import React from 'react';
 // import MouseTracker from './components/MouseTracker';
-import WindowChange from './components/WindowChange'
+// import WindowChange from './components/WindowChange'
+import Timer from './components/Timer';
 // import FormPage from './components/pages/FormPage';
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
 
   return (
     <>
-      <WindowChange />
+      <Timer />
     </>
   );
 };
