@@ -1,10 +1,19 @@
-import React from 'react';
-import FormPage from './components/pages/FormPage';
-class App extends React.Component {
+import React, {useState} from 'react';
+// import FormPage from './components/pages/FormPage';
 
-  render() {
-    return <FormPage />;
+const App = () => {
+
+  const [ count, setCount ] = useState( 0 );
+  const increment = () => {
+    setCount( count + 1 );
   }
+ 
+  return  <>
+  <h1>{ count }</h1>
+  <button onClick={increment}>increment</button>
+  
+  </> 
+  
 }
 
 export default App;
