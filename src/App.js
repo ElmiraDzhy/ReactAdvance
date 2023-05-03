@@ -1,8 +1,8 @@
 import React from 'react';
 // import MouseTracker from './components/MouseTracker';
 // import WindowChange from './components/WindowChange'
-import Timer from './components/Timer';
-// import FormPage from './components/pages/FormPage';
+// import Timer from './components/Timer';
+import FormPage from './components/pages/FormPage';
 
 const App = () => {
   // const [ count, setCount ] = useState( 0 );
@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <>
-      <Timer />
+      <FormPage />
     </>
   );
 };

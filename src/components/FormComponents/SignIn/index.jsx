@@ -25,32 +25,35 @@ function SignIn(props) {
         return (
           <article className={styles.wrapper}>
             <h1 className={styles.title}>Login to your account</h1>
-            <Form className={styles.form}>
-              {/*  */}
-              <div className={styles.fieldWrapper}>
-                <label className={styles.labelField} htmlFor="email">
-                  Email Address
-                </label>
-                <CustomField name="email" placeholder="enter Email address" />
-              </div>
+            <Form>
+              <div className={styles.form}>
+                {/*  */}
+                <div className={styles.fieldWrapper}>
+                  <label className={styles.labelField} htmlFor="email">
+                    Email Address
+                  </label>
+                  <CustomField name="email" placeholder="enter Email address" />
+                </div>
 
-              <div className={styles.fieldWrapper}>
-                <label className={styles.labelField} htmlFor="password">
-                  Password
-                </label>
-                <CustomField name="password" placeholder="enter Password" />
+                <div className={styles.fieldWrapper}>
+                  <label className={styles.labelField} htmlFor="password">
+                    Password
+                  </label>
+                  <CustomField name="password" placeholder="enter Password" />
+                </div>
+                {/*  */}
               </div>
-              {/*  */}
-            </Form>
-
-            <div className={styles.divWrapper}>
+              <div className={styles.divWrapper}>
               <div className={styles.checkboxWrapper}>
                 <Field type="checkbox" value={false} />
                 <p className={styles.remember}>Remember me</p>
               </div>
               <a href="forgot_password.php">Forgot password</a>
-            </div>
+              </div>
             <ButtonForm>{'Login'}</ButtonForm>
+            </Form>
+
+            
           </article>
         );
       }}

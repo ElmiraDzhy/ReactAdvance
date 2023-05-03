@@ -5,20 +5,21 @@
   align-items: $ai;
 }
 
-.flexWrapper {
-}
 
 .fieldWrapperOuter {
   @include flex(row, center, flex-start);
   width: 100%;
 }
 
-.fieldWrapperInner{
+.fieldWrapperInner {
   @include flex(column, center, flex-start);
 
-
   * {
-      width: 290px;
+    width: 290px;
+  }
+
+  label {
+    margin-left: 15px;
   }
 }
 
@@ -29,9 +30,48 @@
   margin: auto;
 
   background-color: white;
-  
+
+  padding: 30px;
+  border-radius: 20px;
 }
 
-label{
+label {
   width: 100%;
+  text-align: left;
+
+  font-size: 12px;
+  font-weight: 500;
 }
+
+.formWrapper {
+  @include flex(column, space-between, center);
+
+  height: 850px;
+}
+
+
+
+.groupWrapper {
+  @include flex(row, flex-start, flex-start);
+  width: 100%;
+  padding: 20px 0;
+
+
+
+  > :nth-child(2){
+    margin-left: auto;
+  }
+}
+
+
+.fieldWrapper{
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+

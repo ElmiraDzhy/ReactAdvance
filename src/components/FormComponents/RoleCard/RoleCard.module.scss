@@ -1,0 +1,50 @@
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+.roleCard {
+  width: 262px;
+  height: 200px;
+
+  padding: 16px;
+  border: 1px solid grey;
+  border-radius: 20px;
+
+  display: inline-flex;
+
+  flex-direction: column;
+
+  p {
+    color: gray;
+  }
+}
+
+.iconGroup {
+  @include flex(row, flex-start, center);
+  height: 50px;
+  padding-bottom: 10px;
+  width: 100%;
+
+  > :nth-child(2) {
+    margin-left: auto;
+  }
+}
+
+.radioField {
+  width: 30px;
+  height: 30px;
+}
+
+.radioField:hover{
+  cursor: pointer;
+ color: rgb(255, 30, 0);
+}
+
+h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
