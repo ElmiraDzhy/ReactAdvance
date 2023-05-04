@@ -3,6 +3,7 @@ import { ThemeContext, UserContext } from './contexts';
 import { CONSTANTS } from './constants';
 import Tree from './components/Tree';
 import Header from './components/Header';
+import Sandbox from './components/sandbox/sandbox';
 
 const App = () => {
   const [theme, setTheme] = useState(CONSTANTS.THEMES.LIGHT);
@@ -28,6 +29,7 @@ const App = () => {
       <ThemeContext.Provider value={[theme, themeChange]}>
         <Header />
         <Tree />
+        <Sandbox/>
       </ThemeContext.Provider>
     </UserContext.Provider>
   );
