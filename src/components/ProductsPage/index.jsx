@@ -1,57 +1,45 @@
 import PropductsList from './../ProductsList';
 import ProductBag from './../ProductBag';
-import React from 'react';
+import React, { useState } from 'react';
 
 export const ProductContext = React.createContext();
 
-class ProductPage extends React.Component {
-  constructor(props) {
-    super(props);
+const ProductPage = () => {
+  const [count, setCount] = useState(0);
+  const [choosedProducts, setChoosedProducts] = useState([]);
+  const [summary, setSummary] = useState(0);
 
-    this.state = {
-      count: 0,
-      choosedProducts: [],
-      summary: 0,
-    };
-  }
+  const countHandler = v => setCount(v);
 
-  countHandler = v => {
-    this.setState({
-      count: v,
-    });
-  };
-
-  chooseProductHandler = p => {
-    const newProductsArr = [...this.state.choosedProducts];
+  const chooseProductHandler = p => {
+    const newProductsArr = [...choosedProducts];
     newProductsArr.push(p);
-    this.setState({
-      choosedProducts: newProductsArr,
-    });
+    setChoosedProducts(newProductsArr);
   };
 
-  setSummary = v => {
-    this.setState(() => ({
-      summary: this.state.summary + v,
-    }));
+  const setSummaryPrice = v => {
+    setSummary(summary => summary + v);
   };
 
-  render() {
-    const { count, choosedProducts, summary } = this.state;
-
-    return (
-      <ProductContext.Provider
-        value={{
-          count: count,
-          countHandler: this.countHandler,
-          chooseProductHandler: this.chooseProductHandler,
-          setSummary: this.setSummary,
-        }}
-      >
-        {<ProductBag count={count} choosedProducts={choosedProducts} summary={summary} />}
-        {<PropductsList />}
-      </ProductContext.Provider>
-    );
-  }
-}
+  return (
+    <ProductContext.Provider
+      value={{
+        count: count,
+        countHandler: countHandler,
+        chooseProductHandler: chooseProductHandler,
+        setSummary: setSummaryPrice,
+      }}
+    >
+      {
+        <ProductBag
+          count={count}
+          choosedProducts={choosedProducts}
+          summary={summary}
+        />
+      }
+      {<PropductsList />}
+    </ProductContext.Provider>
+  );
+};
 
 export default ProductPage;
