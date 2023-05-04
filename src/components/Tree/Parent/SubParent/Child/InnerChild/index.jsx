@@ -1,17 +1,15 @@
-import React from 'react';
-import withTheme from '../../../../../HOCs/withTheme';
-import withUser from '../../../../../HOCs/withUser';
+import React, {useContext} from 'react';
 import classNames from 'classnames';
 import styles from './Child.module.css';
 import { CONSTANTS } from '../../../../../../constants';
 import { Switch } from '@mui/material';
+import { ThemeContext, UserContext } from '../../../../../../contexts';
 
 function InnerChild(props) {
-  const {
-    theme,
-    themeChange,
-    user: [user, logOut],
-  } = props;
+ 
+  const [ theme, themeChange ] = useContext( ThemeContext );
+  const user = useContext( UserContext );
+
   const className = classNames({
     [styles.light]: theme === CONSTANTS.THEMES.LIGHT,
     [styles.dark]: theme === CONSTANTS.THEMES.DARK,
@@ -25,7 +23,7 @@ function InnerChild(props) {
       />
       <p>{user.name}</p>
       <p>{user.surname}</p>
-      <button onClick={logOut}>LogOut</button>
+      <button>LogOut</button>
       <Switch
         checked={theme === CONSTANTS.THEMES.LIGHT}
         onChange={themeChange}
@@ -35,4 +33,4 @@ function InnerChild(props) {
   );
 }
 
-export default withUser(withTheme(InnerChild));
+export default InnerChild;

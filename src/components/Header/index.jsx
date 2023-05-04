@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classNames from 'classnames';
-import withTheme from '../HOCs/withTheme';
-import withUser from '../HOCs/withUser';
+// import withTheme from '../HOCs/withTheme';
+// import withUser from '../HOCs/withUser';
 
 import styles from './Header.module.css';
 import { CONSTANTS } from '../../constants';
+import { UserContext, ThemeContext } from '../../contexts';
 
-function Header(props) {
-  const {
-    theme,
-    themeChange,
-    user: [user],
-  } = props;
+function Header( props ) {
+  
+
+  const [theme, themeChange] = useContext( ThemeContext );
+  const user = useContext( UserContext );
+
+
   const className = classNames({
     [styles.light]: theme === CONSTANTS.THEMES.LIGHT,
     [styles.dark]: theme === CONSTANTS.THEMES.DARK,
@@ -35,6 +37,6 @@ function Header(props) {
   );
 }
 
-const HeaderWithContext = withUser(withTheme(Header));
+// const HeaderWithContext = withUser(withTheme(Header));
 
-export default HeaderWithContext;
+export default Header;

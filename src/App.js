@@ -1,19 +1,35 @@
-import React from 'react';
-// import MouseTracker from './components/MouseTracker';
-// import WindowChange from './components/WindowChange'
-// import Timer from './components/Timer';
-import FormPage from './components/pages/FormPage';
+import React, { useState } from 'react';
+import { ThemeContext, UserContext } from './contexts';
+import { CONSTANTS } from './constants';
+import Tree from './components/Tree';
+import Header from './components/Header';
 
 const App = () => {
-  // const [ count, setCount ] = useState( 0 );
-  // const increment = () => {
-  //   setCount( count + 1 );
-  // }
+  const [theme, setTheme] = useState(CONSTANTS.THEMES.LIGHT);
+
+  const themeChange = () => {
+    setTheme(
+      theme === CONSTANTS.THEMES.LIGHT
+        ? CONSTANTS.THEMES.DARK
+        : CONSTANTS.THEMES.LIGHT
+    );
+  };
 
   return (
-    <>
-      <FormPage />
-    </>
+    <UserContext.Provider
+      value={{
+        id: '1',
+        name: 'test',
+        surname: 'testovich',
+        avatar:
+          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80',
+      }}
+    >
+      <ThemeContext.Provider value={[theme, themeChange]}>
+        <Header />
+        <Tree />
+      </ThemeContext.Provider>
+    </UserContext.Provider>
   );
 };
 

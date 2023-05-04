@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Parent from './Parent';
 import styles from './Tree.module.css';
 import classNames from 'classnames';
 import { CONSTANTS } from '../../constants';
-import withTheme from '../HOCs/withTheme';
 
-function Tree(props) {
-  const { theme } = props;
+import { ThemeContext } from '../../contexts';
+
+function Tree() {
+  const [theme] = useContext( ThemeContext );
   const className = classNames({
     [styles.light]: theme === CONSTANTS.THEMES.LIGHT,
     [styles.dark]: theme === CONSTANTS.THEMES.DARK,
-  });
+  } );
+  
   return (
+    
     <div className={className}>
       <p>Tree</p>
       <Parent />
@@ -19,5 +22,5 @@ function Tree(props) {
   );
 }
 
-const TreeWithTheme = withTheme(Tree);
-export default TreeWithTheme;
+// const TreeWithTheme = withTheme(Tree);
+export default Tree;
