@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 
 function computeValue( value ) {
   return value ** 3;
@@ -16,7 +16,7 @@ function Sandbox( props ) {
   }, [inputValue]);
 
   
-  const layoutValue = computeValue( inputValue );
+  const layoutValue = useMemo(() => computeValue( inputValue ), [inputValue]);
 
   return (
     <div>
