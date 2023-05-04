@@ -4,7 +4,8 @@ import { CONSTANTS } from './constants';
 import Tree from './components/Tree';
 import Header from './components/Header';
 import Sandbox from './components/sandbox/sandbox';
-
+import UserList from './components/UserList'
+import UserLoader from './components/UserLoader';
 const App = () => {
   const [theme, setTheme] = useState(CONSTANTS.THEMES.LIGHT);
 
@@ -29,7 +30,9 @@ const App = () => {
       <ThemeContext.Provider value={[theme, themeChange]}>
         <Header />
         <Tree />
-        <Sandbox/>
+        <Sandbox />
+        <UserList />
+        <UserLoader/>
       </ThemeContext.Provider>
     </UserContext.Provider>
   );

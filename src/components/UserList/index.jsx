@@ -1,56 +1,43 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from './Spinner';
-const API_BASE = 'https://fakestoreapi.com/users';
+import { getUsers } from '../../api/getUsers';
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+  const [isFetching, setIsFetching] = useState(true);
+  const [page, setPage] = useState(1);
 
-export default class index extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: [],
-      error: null,
-      isFetching: true,
-    };
-  }
-
-  componentDidMount = () => {
-
-    fetch(API_BASE)
-      .then(res => res.json())
-      .then(data =>
-        this.setState({
-          users: data,
-        })
-      )
+  useEffect(() => {
+    getUsers(page)
+      .then(data => setUsers(data.results))
       .catch(e => {
-        this.setState({
-          error: e,
+        setError(error);
+      })
+      .finally(setIsFetching(false));
+  }, [page, error]);
 
-        });
-      } )
-      .finally( this.setState( {
-        isFetching: false,
-        
-      }))
-     
+  const increment = () => {
+    setPage(page => page + 1);
+  };
+  const decrement = () => {
+    setPage(page => page - 1);
   };
 
-  render() {
-    const { users, error, isFetching } = this.state;
-    const usersMap = users.map(u => (
-      <li key={u.id}>
-        {u.name.firstname} {u.name.lastname}
-      </li>
-    ));
+  return (
+    <>
+      <button onClick={increment}>next</button>
+      <button onClick={decrement}>prev</button>
+      {isFetching && <Spinner />}
+      {error && <div>Error</div>}
+      <ol>
+        {users.map(u => (
+          <li key={u.login.uuid}>
+            {u.name.first} {u.name.last}
+          </li>
+        ))}
+      </ol>
+    </>
+  );
+};
 
-    if (isFetching) {
-      return <Spinner />;
-    }
-
-    if (error) {
-      return <div className="">Error...</div>;
-    }
-
-    return <ul>{usersMap}</ul>;
-  }
-}
+export default UserList;
