@@ -1,110 +1,84 @@
-import React, { Component } from "react";
-import ToDoForm from "./ToDoForm";
-import ToDoItem from "./ToDoItem";
-import { getTime } from "date-fns";
+import React, { useReducer } from 'react';
+import ToDoForm from './ToDoForm';
+import ToDoItem from './ToDoItem';
+import { getTime } from 'date-fns';
 import styles from './ToDoList.module.css';
 
-export default class ToDoList extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			todoList: [],
-		};
-	}
-
-	addNewItem = (data) => {
-		const { todoList } = this.state;
-
-		this.setState({
-			todoList: [
-				...todoList,
-				{
-					...data,
-					id: todoList.length,
-				},
-			],
-		});
-	};
-
-	changeIsDone = (isDone, id) => {
-		const { todoList } = this.state;
-
-		const newList = todoList.map((td) => {
-			if (td.id === id) {
-				td.isDone = isDone;
-			}
-			return td;
-		});
-
-		this.setState({
-			todoList: newList,
-		});
-	};
-
-	removeListItem = (id) => {
-		const { todoList } = this.state;
-
-		const newList = todoList.filter((td) => {
-			if (td.id !== id) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-
-		this.setState({
-			todoList: newList,
-		});
-	};
-
-	changeTextItem = (newText, id) => {
-		const { todoList } = this.state;
-		const newList = todoList.map((item) => {
-			if (item.id === id) {
-				item.toDoItem = newText;
-			}
-			return item;
-		});
-		this.setState({
-			todoList: newList,
-		});
-	};
-
-	sortList = () => {
-		const { todoList } = this.state;
-		const newList = [...todoList];
-		newList.sort((a, b) => {
-			return getTime(a.time) > getTime(b.time) ? 1 : -1;
-    } );
-    
-    this.setState( {
-      todoList: newList,
-    })
-
-	};
-
-	render() {
-		const { todoList } = this.state;
-
-		const liMap = todoList.map((todo) => (
-			<ToDoItem
-				data={todo}
-				key={todo.id}
-				removeListItem={this.removeListItem}
-				changeIsDone={this.changeIsDone}
-				changeText={this.changeTextItem}
-			/>
-		));
-
-		return (
-			<div className={ styles.container }>
-				<h1 className={styles.title}>To Do List</h1>
-				<ToDoForm callback={this.addNewItem} />
-				<button className={styles.btn} onClick={this.sortList}>SORT</button>
-				<ul>{liMap}</ul>
-			</div>
-		);
-	}
+function reducer(state, action) {
+  return { todoList: [...action.value] };
 }
 
+const ToDoList = () => {
+  const [state, dispatch] = useReducer(reducer, { todoList: [] });
+  const { todoList } = state;
+
+	const addNewItem = data => {
+    dispatch({
+      value: [...todoList, { ...data, id: todoList.length }],
+    });
+  };
+
+  const changeIsDone = (isDone, id) => {
+    const newList = todoList.map(td => {
+      if (td.id === id) {
+        td.isDone = isDone;
+      }
+      return td;
+    });
+    dispatch({ value: newList });
+  };
+
+  const removeListItem = id => {
+    const newList = todoList.filter(td => {
+      if (td.id !== id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    dispatch({ value: newList });
+  };
+
+  const changeTextItem = (newText, id) => {
+    const newList = todoList.map(item => {
+      if (item.id === id) {
+        item.toDoItem = newText;
+      }
+      return item;
+    });
+    dispatch({ value: newList });
+  };
+
+  const sortList = () => {
+    const newList = [...todoList];
+    newList.sort((a, b) => {
+      return getTime(a.time) > getTime(b.time) ? 1 : -1;
+    });
+
+    dispatch({ value: newList });
+  };
+
+
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>To Do List</h1>
+      <ToDoForm callback={addNewItem} />
+      <button className={styles.btn} onClick={sortList}>
+        SORT
+      </button>
+      <ul>
+        {todoList && todoList.map(todo => (
+          <ToDoItem
+            data={todo}
+            key={todo.id}
+            removeListItem={removeListItem}
+            changeIsDone={changeIsDone}
+            changeText={changeTextItem}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ToDoList;
