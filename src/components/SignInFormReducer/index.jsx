@@ -1,70 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
 import { format } from 'date-fns';
-
-const INITIAL_STATE = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  birthday: new Date(),
-  isFetching: false,
-  error: null,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'firstName':
-    case 'lastName':
-    case 'email':
-    case 'password': {
-      return {
-        ...state,
-        [action.type]: action.value,
-      };
-    }
-    case 'birthday': {
-      return {
-        ...state,
-        [action.type]: new Date(action.value),
-      };
-    }
-    case 'reset': {
-      return INITIAL_STATE;
-    }
-
-    case 'load': {
-      return {
-        ...state,
-        isFetching: true,
-      };
-    }
-    case 'loadSuccess': {
-      return {
-        ...state,
-        ...action.value,
-        birthday: new Date(action.value.birthday),
-        isFetching: false,
-      };
-    }
-    case 'error': {
-      return {
-        ...state,
-        isFetching: false,
-        error: action.value,
-      };
-    }
-
-    default: {
-      return state;
-    }
-  }
-}
+import { reducer, INITIAL_STATE } from '../../reducers/FormReducer';
+import { CONSTANTS } from '../constants';
 
 function SignInFormReducer() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { firstName, lastName, email, password, birthday, isFetching, error } =
     state;
-
+  const { ACTIONSTYPES } = CONSTANTS;
   const changeHandler = ({ target: { value, name } }) => {
     const action = {
       value,
@@ -80,13 +23,13 @@ function SignInFormReducer() {
         .then(res => res.json())
         .then(data =>
           dispatch({
-            type: 'loadSuccess',
+            type: ACTIONSTYPES.LOADSUCCESS,
             value: data,
           })
         )
         .catch(e =>
           dispatch({
-            type: 'error',
+            type: ACTIONSTYPES.ERROR,
             value: e,
           })
         );
@@ -102,14 +45,14 @@ function SignInFormReducer() {
     e.preventDefault();
 
     dispatch({
-      type: 'reset',
+      type: ACTIONSTYPES.RESET,
     });
   };
 
   const fetchData = e => {
     e.preventDefault();
     dispatch({
-      type: 'load',
+      type: ACTIONSTYPES.LOAD,
     });
   };
 
