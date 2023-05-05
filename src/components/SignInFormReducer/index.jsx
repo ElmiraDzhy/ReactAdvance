@@ -1,39 +1,56 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { format } from 'date-fns';
+
+const INITIAL_STATE = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  birthday: new Date(),
+  isFetching: false,
+  error: null,
+};
 
 function reducer(state, action) {
   switch (action.type) {
     case 'firstName':
     case 'lastName':
     case 'email':
-    case 'password':
-    case 'birthday':
-    case 'gender': {
+    case 'password': {
       return {
         ...state,
         [action.type]: action.value,
       };
     }
-    case 'form submitted': {
+    case 'birthday': {
+      return {
+        ...state,
+        [action.type]: new Date(action.value),
+      };
+    }
+    case 'reset': {
+      return INITIAL_STATE;
+    }
+
+    case 'load': {
       return {
         ...state,
         isFetching: true,
       };
     }
-    case 'reset': {
+    case 'loadSuccess': {
       return {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        birthday: '',
-        gender: '',
+        ...state,
+        ...action.value,
+        birthday: new Date(action.value.birthday),
         isFetching: false,
       };
     }
-
-    case 'load': {
+    case 'error': {
       return {
-        ...action.data,
+        ...state,
+        isFetching: false,
+        error: action.value,
       };
     }
 
@@ -44,15 +61,9 @@ function reducer(state, action) {
 }
 
 function SignInFormReducer() {
-  const [state, dispatch] = useReducer(reducer, {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    birthday: '',
-    gender: '',
-    isFetching: false,
-  });
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const { firstName, lastName, email, password, birthday, isFetching, error } =
+    state;
 
   const changeHandler = ({ target: { value, name } }) => {
     const action = {
@@ -63,11 +74,28 @@ function SignInFormReducer() {
     dispatch(action);
   };
 
+  useEffect(() => {
+    if (state.isFetching) {
+      fetch('./userData.json')
+        .then(res => res.json())
+        .then(data =>
+          dispatch({
+            type: 'loadSuccess',
+            value: data,
+          })
+        )
+        .catch(e =>
+          dispatch({
+            type: 'error',
+            value: e,
+          })
+        );
+    }
+  }, [state.isFetching]);
+
   const submitHandler = e => {
     e.preventDefault();
-    dispatch({
-      type: 'form submitted',
-    });
+    console.log(state);
   };
 
   const resetHandler = e => {
@@ -80,19 +108,10 @@ function SignInFormReducer() {
 
   const fetchData = e => {
     e.preventDefault();
-
-    fetch('./userData.json')
-      .then(res => res.json())
-      .then(data =>
-        dispatch({
-          type: 'load',
-          data: { ...data },
-        })
-      );
+    dispatch({
+      type: 'load',
+    });
   };
-
-  const { firstName, lastName, email, password, birthday, gender, isFetching } =
-    state;
 
   return (
     <form
@@ -105,6 +124,7 @@ function SignInFormReducer() {
       }}
     >
       {isFetching && <div>Loading</div>}
+      {error && <div>error</div>}
       <input
         type="text"
         name="firstName"
@@ -127,38 +147,10 @@ function SignInFormReducer() {
       <input
         type="date"
         name="birthday"
-        value={birthday}
+        value={format(birthday, 'yyyy-MM-dd')}
         onChange={changeHandler}
       />
 
-      <p>Gender</p>
-      <label>
-        <input
-          type="radio"
-          name="gender"
-          value={gender}
-          onChange={changeHandler}
-        />
-        Male
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="gender"
-          onChange={changeHandler}
-          value={gender}
-        />
-        Female
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="gender"
-          value={gender}
-          onChange={changeHandler}
-        />
-        Other
-      </label>
       <div>
         <button onClick={submitHandler}>Submit</button>
         <button onClick={resetHandler}>reset</button>
