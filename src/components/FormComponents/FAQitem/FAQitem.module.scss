@@ -9,27 +9,31 @@
   border-radius: 20px;
   background-color: white;
 
-  transition-property: height;
-  transition-duration: 0.5s;
+  transition-property: all;
+  transition-duration: 0.35s;
   transition-timing-function: ease-in-out;
 
-  
+  margin: 10px 0;
 }
 
 .container:hover {
   border: 1px solid blue;
+  background-color: rgb(217, 238, 255);
   cursor: pointer;
 }
 
 .containerOpen {
   height: 290px;
-  background-color: rgb(80, 141, 255);
+  min-height: 50px;
+  background-color: rgb(64, 131, 255);
   border: none;
   color: white;
+  overflow: hidden;
 }
 
-.containerOpen:hover{
+.containerOpen:hover {
   border: none;
+  background-color: rgb(64, 131, 255);
 }
 
 .captionWrapper {
@@ -51,8 +55,7 @@
 
 .contentOpen {
   display: block;
-  margin-top: auto;
-  // height: 50%;
+  margin: 0;
   padding: 20px;
   line-height: 1.5;
 }
